@@ -56,6 +56,7 @@ header button{
 }
 section{
     background-color: aqua;
+     
 }
 .main{
    
@@ -159,3 +160,90 @@ section{
 .coding{
     background-color: rgb(222, 222, 37);
 }
+.main3{
+    width: 100%;
+   height:80vh;
+
+}
+#targetcenter{
+   width: 40%;
+   height:80vh;;
+  margin: auto;
+  padding:3rem;
+   /* margin:5rem auto; */}
+.flex2{
+    width:600px;
+    height:400px;
+    background-color: white;
+    ;
+}
+.flex1{
+    width:600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom:1.5rem;
+}
+   .timer{
+    width:30px;
+    height:30px;
+    border-radius: 50%;
+    border:1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   .flex2btn{
+    /* text-align: center; */
+    width:600px;
+     display: flex;
+    align-items: center;
+    justify-content: center; 
+    
+   }
+   .nextbtn{
+    padding:0.4rem;
+    width:100px;
+    background-color: black;
+    color:white;
+   }
+   .quitbtn{
+    padding:0.4rem;
+    width:100px;
+    margin-left:2rem;
+    background-color:red;
+    color:white;
+   }
+   
+   .quizend1{
+    width: 600px;
+    height:80vh;
+    margin:3rem  auto;
+    height: 350px;
+    padding: 5rem;
+    background-color: white;
+    
+   }
+   .quizend2{
+   
+    /* text-align: center; */
+    margin-top:2rem;
+   }
+   .endbtn1,.endbtn2,.endbtn3{
+    width:130px ;
+    padding:0.5rem;
+    border: none;
+   }
+   .endbtn1{
+    background-color: black;
+   color:#fff; ;
+   }
+   .endbtn2{
+    background-color: skyblue;
+   color:#fff; ;
+   }
+   .endbtn3{
+    background-color:red;
+   color:#fff; ;
+   }
+   

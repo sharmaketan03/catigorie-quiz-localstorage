@@ -14,6 +14,9 @@ let formbutton1 = document.querySelector(".button1");
 let formbutton2 = document.querySelector(".button2");
 let nextbtn = document.querySelector(".nextbtn");
 let quitbtn = document.querySelector(".quitbtn");
+let getresult = document.querySelector(".endbtn1");
+let resultscorepara = document.querySelector(".resultscore");
+let playagain = document.querySelector(".endbtn2");
 let username;
 
 let i = 0;
@@ -27,10 +30,26 @@ let fourtype;
 let incl=[]
 let randomtypes=[]
 
+
 let api=[ "https://opentdb.com/api.php?amount=5&category=12&difficulty=easy&type=multiple","https://opentdb.com/api.php?amount=4&category=23&difficulty=easy&type=multiple","https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple"]
 UserName.addEventListener("click", () => {
   form.classList.remove("hidden");
 });
+playagain.addEventListener("click",()=>{
+  i = 0;
+  score = 0;
+  arrayquestions = [];
+  timer = 5;
+  main2.classList.remove("hidden")
+    main3.classList.add("hidden")
+    main.classList.add("hidden")
+    head.classList.add("hidden")
+    quizend.classList.add("hidden")
+ 
+    callback()
+})
+
+
 formbutton1.addEventListener("click", () => {
   username = input.value;
   UserName.innerHTML = input.value;
@@ -63,13 +82,16 @@ let coding = document.querySelector(".coding");
 let choosebtn = document.querySelectorAll(".choosebutton p");
 let main2btn = document.querySelector(".main2start");
 let main3 = document.querySelector(".main3");
-
-for(let i=0;i<choosebtn.length;i++){
-    choosebtn[i].addEventListener("click",(e)=>{
+callback()
+function callback(){
+for(let j=0;j<choosebtn.length;j++){
+    choosebtn[j].addEventListener("click",(e)=>{
           selectedvalue=e.target.innerHTML
-          fetchAPI(api[i]);
+          fetchAPI(api[j]);
     })
 }
+}
+
 
 main2btn.addEventListener("click", () => {
   if(arrayquestions.length!==0){
@@ -183,6 +205,6 @@ nextbtn.addEventListener("click", () => {
         getdata(arrayquestions);    
   }
 });
-
-
-
+getresult.addEventListener("click",()=>{
+  resultscorepara.classList.remove("hidden")
+})

@@ -18,10 +18,16 @@ let username;
 
 let i = 0;
 let timer = 5;
+let selectedvalue;
 let arrayquestions = [];
 let correct_answer;
 let buttonstocheck;
 let score=0;
+let fourtype;
+let incl=[]
+let randomtypes=[]
+
+let api=[ "https://opentdb.com/api.php?amount=5&category=12&difficulty=easy&type=multiple","https://opentdb.com/api.php?amount=4&category=23&difficulty=easy&type=multiple","https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple"]
 UserName.addEventListener("click", () => {
   form.classList.remove("hidden");
 });
@@ -54,31 +60,25 @@ startquiz.addEventListener("click", () => {
 let music = document.querySelector(".music");
 let modern = document.querySelector(".modern");
 let coding = document.querySelector(".coding");
+let choosebtn = document.querySelectorAll(".choosebutton p");
 let main2btn = document.querySelector(".main2start");
 let main3 = document.querySelector(".main3");
-music.addEventListener("click", (e) => {
-  console.log(e.target.innerHTML);
-  modern.disabled = true;
-  coding.disabled = true;
-  let API =
-    "https://opentdb.com/api.php?amount=5&category=12&difficulty=easy&type=multiple";
 
-  fetchAPI(API);
-});
-modern.addEventListener("click", (e) => {
-  console.log(e.target.innerHTML);
-  music.disabled = true;
-  coding.disabled = true;
-});
-coding.addEventListener("click", (e) => {
-  console.log(e.target.innerHTML);
-  modern.disabled = true;
-  music.disabled = true;
-});
+for(let i=0;i<choosebtn.length;i++){
+    choosebtn[i].addEventListener("click",(e)=>{
+          selectedvalue=e.target.innerHTML
+          fetchAPI(api[i]);
+    })
+}
+
 main2btn.addEventListener("click", () => {
-  main2.classList.add("hidden");
+  if(arrayquestions.length!==0){
+ main2.classList.add("hidden");
   main.classList.add("hidden");
   main3.classList.remove("hidden");
+  maindiv.classList.remove()
+  }
+ 
 });
 
 let options = document.querySelectorAll(".flex2 p");
@@ -109,6 +109,7 @@ async function fetchAPI(API) {
         clearInterval(settime);
         quizend.classList.remove("hidden");
         main3.classList.add("hidden");
+
        
         resultscore.innerHTML="Your Score"+ " " +score
       }
@@ -122,24 +123,42 @@ async function fetchAPI(API) {
 
   }, 1000);
 
-  
+  quitbutton(settime)
+
+ 
+
 }
+function quitbutton(settime){
+  quitbtn.addEventListener("click", () => {
 
+    main2.classList.remove("hidden")
+    main3.classList.add("hidden")
+    main.classList.add("hidden")
+    head.classList.add("hidden")
+    // maindiv.innerHTML=" "
+   clearInterval(settime)  
+});
+}
+let questions=document.querySelector(".questions")
+let optins=document.querySelector(".opt")
 function getdata(arr) {
-  maindiv.innerHTML = " ";
-
-  let div = document.createElement("div");
+  // maindiv.innerHTML = " ";
+ fourtype=[...arr[i].incorrect_answers,arr[i].correct_answer]
+ fourtype.sort(()=>Math.random()-0.5)
+  
+//  let div = document.createElement("div");
   //  div.classList.add("buttonsAll")
-  div.innerHTML = `
+  questions.innerHTML = `
     <h1>${arr[i].question}</h1>
-    <button>${arr[i].correct_answer}</button>
-    <button>${arr[i].incorrect_answers[0]}</button>
-    <button>${arr[i].incorrect_answers[1]}</button>
-    <button>${arr[i].incorrect_answers[2]}</button>
-  `;
+    
+  `
+  optins.innerHTML=fourtype.map((opt)=>`
+  <button>${opt}</button>
+  `).join("")
+ 
    correct_answer = arr[i].correct_answer
    console.log(correct_answer)
-  maindiv.append(div);
+  // maindiv.append(div);
 
   buttonstocheck=document.querySelectorAll(".flex2 button")
   for(let i=0;i<buttonstocheck.length;i++){
@@ -164,5 +183,6 @@ nextbtn.addEventListener("click", () => {
         getdata(arrayquestions);    
   }
 });
-quitbtn.addEventListener("click", () => {});
+
+
 

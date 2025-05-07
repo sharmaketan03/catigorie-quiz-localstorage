@@ -48,7 +48,7 @@
           </div>
         </div>
       </div>
-      <div class="main2">
+      <div class="main2 hidden">
         <header>
           <div class="head1">
             <h1>Quiz</h1>
@@ -66,10 +66,12 @@
           <div class="discriptionpage">
             <p class="fontsize">Welcome to Quiz app</p>
             <h4>select topic</h4>
-            <p class="music">Music</p>
-            <p class="modern">modern art</p>
-            <p class="coding">coding</p>
-
+            <div class="choosebutton">
+              <p class="music">Music</p>
+              <p class="modern">modern art</p>
+              <p class="coding">coding</p>
+              </div>
+           
             <button class="main2start">Start</button>
           </div>
           <!-- <div class="buttonspara">
@@ -77,32 +79,41 @@
         </div>
       </div>
 
-      <div class="main3">
+      <div class="main3 hidden">
         <div id="targetcenter">
           <div class="flex1">
             <h2>coding quiz</h2>
             <div class="timer">5</div>
           </div>
 
-          <div class="flex2"></div>
-          <div class="flex2btn">
-            <button class="nextbtn">Next</button>
-            <button class="quitbtn">Quit</button>
+          <div class="flex2">
+               <div class="questions"></div>
+               <div class="opt"></div>
+          
+               <div class="flex2btn">
+                <button class="nextbtn">Next</button>
+                <button class="quitbtn">Quit</button>
+              </div>
           </div>
+         
 </div>
 
 
       </div>
+      
       <div class="quizend1 hidden">
-        <h3>Well done !  Your Answered All The Questions. </h3>
-        <p class="resultscore"></p>
-        <div class="quizend2">
-            <button class="endbtn1">Get Result</button>
-            <button class="endbtn2">Play again</button>
-            <button class="endbtn3">Quit</button>
+        <div class="innerlast">
+          <h3>Well done !  Your Answered All The Questions. </h3>
+          <p class="resultscore"></p>
+          <div class="quizend2">
+            
+              <button class="endbtn1">Get Result</button>
+              <a href=""><button class="endbtn2">Play again</button></a>
+              <button class="endbtn3">Quit</button>
         </div>
-    </div>
-     
+       
+        </div>
+      </div>
     </section>
 
     <script src="index.js"></script>

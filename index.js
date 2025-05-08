@@ -77,7 +77,6 @@ for(let j=0;j<choosebtn.length;j++){
     choosebtn[j].addEventListener("click",(e)=>{
          value=j
     
-          fetchAPI(api[j]);
     })
 }
 }
@@ -94,7 +93,7 @@ playagain.addEventListener("click",()=>{
     quizend.classList.add("hidden")
 
     fetchAPI(api[value])
- 
+  
 })
 let obj={
   Name:coding,
@@ -103,14 +102,18 @@ let obj={
 }
 
 main2btn.addEventListener("click", () => {
-  if(arrayquestions.length!==0){
+  if(value!=""){
     
- main2.classList.add("hidden");
-  main.classList.add("hidden");
-
-  main3.classList.remove("hidden");
-  maindiv.classList.remove()
  
+ 
+  }else{
+    main2.classList.add("hidden");
+    main.classList.add("hidden");
+  
+    main3.classList.remove("hidden");
+    maindiv.classList.remove()
+    fetchAPI(api[value]);
+  
   }
 
   

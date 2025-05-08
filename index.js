@@ -17,6 +17,8 @@ let quitbtn = document.querySelector(".quitbtn");
 let getresult = document.querySelector(".endbtn1");
 let resultscorepara = document.querySelector(".resultscore");
 let playagain = document.querySelector(".endbtn2");
+let Quitbtn= document.querySelector(".endbtn3");
+let selectedlist= document.querySelectorAll("#headli li");
 let username;
 
 let i = 0;
@@ -29,25 +31,12 @@ let score=0;
 let fourtype;
 let incl=[]
 let randomtypes=[]
-
-
+let value;
+let localarray=[]
 let api=[ "https://opentdb.com/api.php?amount=5&category=12&difficulty=easy&type=multiple","https://opentdb.com/api.php?amount=4&category=23&difficulty=easy&type=multiple","https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple"]
 UserName.addEventListener("click", () => {
   form.classList.remove("hidden");
 });
-playagain.addEventListener("click",()=>{
-  i = 0;
-  score = 0;
-  arrayquestions = [];
-  timer = 5;
-  main2.classList.remove("hidden")
-    main3.classList.add("hidden")
-    main.classList.add("hidden")
-    head.classList.add("hidden")
-    quizend.classList.add("hidden")
- 
-    callback()
-})
 
 
 formbutton1.addEventListener("click", () => {
@@ -86,21 +75,45 @@ callback()
 function callback(){
 for(let j=0;j<choosebtn.length;j++){
     choosebtn[j].addEventListener("click",(e)=>{
-          selectedvalue=e.target.innerHTML
+         value=j
+    
           fetchAPI(api[j]);
     })
 }
 }
 
+// localarray.append(obj)
+playagain.addEventListener("click",()=>{
+  i = 0;
+ timer = 5;
+ score=0
+  main2.classList.add("hidden")
+    main3.classList.remove("hidden")
+    main.classList.add("hidden")
+    head.classList.add("hidden")
+    quizend.classList.add("hidden")
+
+    fetchAPI(api[value])
+ 
+})
+let obj={
+  Name:coding,
+  Date:new Date().toLocaleString(),
+  score:0
+}
 
 main2btn.addEventListener("click", () => {
   if(arrayquestions.length!==0){
+    
  main2.classList.add("hidden");
   main.classList.add("hidden");
+
   main3.classList.remove("hidden");
   maindiv.classList.remove()
-  }
  
+  }
+
+  
 });
 
 let options = document.querySelectorAll(".flex2 p");
@@ -123,7 +136,7 @@ async function fetchAPI(API) {
     if (timer === 0) {
       i++;
       if (i < arrayquestions.length) {
-        //   maindiv.innerHTML=" "
+      
         time.innerHTML = timer;
         timer = 5;
         getdata(arrayquestions);
@@ -133,7 +146,14 @@ async function fetchAPI(API) {
         main3.classList.add("hidden");
 
        
-        resultscore.innerHTML="Your Score"+ " " +score
+        resultscore.innerHTML=`Your Score ${score} out of ${arrayquestions.length}`
+       
+        console.log(score)
+        
+      localarray.push(obj)
+      localStorage.setItem("localarray",JSON.stringify(localarray))
+      console.log(localarray)
+      // localStorage.clear()
       }
     } else {
       timer--;
@@ -146,30 +166,43 @@ async function fetchAPI(API) {
   }, 1000);
 
   quitbutton(settime)
-
+  Quitbutton(settime)
  
 
 }
-function quitbutton(settime){
-  quitbtn.addEventListener("click", () => {
 
+function Quitbutton(settime){
+  Quitbtn.addEventListener("click", () => {
+    i = 0;
+     timer = 5;
     main2.classList.remove("hidden")
     main3.classList.add("hidden")
     main.classList.add("hidden")
     head.classList.add("hidden")
-    // maindiv.innerHTML=" "
+
+   clearInterval(settime)  
+});
+}
+function quitbutton(settime){
+  quitbtn.addEventListener("click", () => {
+    i = 0;
+    timer = 5;
+    main2.classList.remove("hidden")
+    main3.classList.add("hidden")
+    main.classList.add("hidden")
+    head.classList.add("hidden")
+
    clearInterval(settime)  
 });
 }
 let questions=document.querySelector(".questions")
 let optins=document.querySelector(".opt")
 function getdata(arr) {
-  // maindiv.innerHTML = " ";
+  
  fourtype=[...arr[i].incorrect_answers,arr[i].correct_answer]
  fourtype.sort(()=>Math.random()-0.5)
   
-//  let div = document.createElement("div");
-  //  div.classList.add("buttonsAll")
+
   questions.innerHTML = `
     <h1>${arr[i].question}</h1>
     
@@ -180,14 +213,14 @@ function getdata(arr) {
  
    correct_answer = arr[i].correct_answer
    console.log(correct_answer)
-  // maindiv.append(div);
+  
 
   buttonstocheck=document.querySelectorAll(".flex2 button")
   for(let i=0;i<buttonstocheck.length;i++){
     buttonstocheck[i].addEventListener("click",(e)=>{
       if(correct_answer===e.target.innerHTML){
           score+=1
-         
+          obj.score=score
       }
      
   })
@@ -207,4 +240,23 @@ nextbtn.addEventListener("click", () => {
 });
 getresult.addEventListener("click",()=>{
   resultscorepara.classList.remove("hidden")
+})
+
+selectedlist.forEach((Element,index)=>{
+  selectedlist[index].addEventListener("click",()=>{
+            if(selectedlist[index].innerHTML===selectedlist[0].innerHTML){
+                    window.location.reload()
+            }else if(selectedlist[index].innerHTML===selectedlist[1].innerHTML){
+              i = 0;
+              timer = 5;
+             main2.classList.remove("hidden")
+             main3.classList.add("hidden")
+             main.classList.add("hidden")
+             head.classList.add("hidden")
+         
+            // clearInterval(settime)  
+            }else if(selectedlist[index].innerHTML===selectedlist[2].innerHTML){
+                       
+            }
+  })
 })

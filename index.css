@@ -15,6 +15,11 @@ header{
     justify-content: space-between;
     padding:10px 40px;
 }
+.start h1{
+    font-size: 44px;
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+}
 
 .notifictaionmain{
     /* display: inline-block; */
@@ -50,9 +55,10 @@ header button{
 }
 #startquiz{
     padding: 0.3rem;
-    width: 15%; 
+    width: 28%; 
     background-color: #000;
     color:#fff;
+
 }
 section{
     background-color: aqua;
@@ -73,8 +79,8 @@ section{
    
 }   
 .startimg{
-    width:20%;
-    height:30%;
+    width: 45%;
+    height: 50%;
 
 }
 .startimg img{
